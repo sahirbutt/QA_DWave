@@ -19,6 +19,6 @@ results = solver.sample(bqm)
 print(results)
 
 # Usig dWave
-#sampler = dwave.system.EmbeddingComposite(dwave.system.DWaveSampler())
-#sampleset = sampler.sample(bqm, num_reads=10)
-#dwave.inspector.show(sampleset)
+sampler = dwave.system.EmbeddingComposite(dwave.system.DWaveSampler())
+sampleset = sampler.sample(bqm, num_reads=10)
+dwave.inspector.show(sampleset)

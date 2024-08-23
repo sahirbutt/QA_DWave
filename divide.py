@@ -1,6 +1,10 @@
 import dimod
 import dwave.inspector
 import dwave.system
+import numpy as np
+
+# Number of qubits (R)
+R = 4
 
 # Empty dictionary for linear and quadratic part of the hamiltonian
 # Length of these will be decided by the number of qubits we want to use
@@ -9,12 +13,9 @@ quadratic = {}
 offset = 0.0
 vartype = dimod.BINARY
 
-# Number of qubits (R)
-R = 3
-
 # trying to find binary representation Q of x according to x = y/m; xE[-1,3)
 y = 1
-m = 3
+m = 1
 
 # Fill linear and quadratic term according to
 # Lin(r) = sum_r(0 to R-1) 4m2^(-r)[m2^(-r) - (y+m)]
@@ -28,8 +29,8 @@ for r in range(R):
 		if r==s:
 			quadratic[r,s] = 4*m*m * 2**(-r-s)
 
-print(linear)
-print(quadratic)
+#print(linear)
+#print(quadratic)
 
 bqm = dimod.BinaryQuadraticModel(linear, quadratic, offset, vartype)
 
@@ -37,8 +38,11 @@ solver = dimod.ExactSolver()
 
 results = solver.sample(bqm)
 
-#print(results.first)
-b 
+print(results.first)
+print()
+
+#b = {}
+b = np.zeros(R)
 for i in range(R):
 	b[i] = results.first[0][i]
 
