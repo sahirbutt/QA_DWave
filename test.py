@@ -4,6 +4,6 @@ import dwave.system
 
 bqm = dimod.generators.ran_r(1, 20)
 sampler = dwave.system.EmbeddingComposite(dwave.system.DWaveSampler())
-sampleset = sampler.sample(bqm, num_reads=100)
+sampleset = sampler.sample(bqm, num_reads=10)
 dwave.inspector.show(sampleset)
 

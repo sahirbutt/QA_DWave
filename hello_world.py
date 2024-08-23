@@ -1,5 +1,7 @@
 #imports
 import dimod
+import dwave.inspector
+import dwave.system
 
 #solver
 solver = dimod.ExactSolver()
@@ -16,3 +18,7 @@ results = solver.sample(bqm)
 #print result
 print(results)
 
+# Usig dWave
+#sampler = dwave.system.EmbeddingComposite(dwave.system.DWaveSampler())
+#sampleset = sampler.sample(bqm, num_reads=10)
+#dwave.inspector.show(sampleset)
