@@ -3,12 +3,29 @@ import random
 import math
 
 # Example TSP instance as a distance matrix
-distance_matrix = np.array([
-    [0, 10, 15, 20],
-    [10, 0, 35, 25],
-    [15, 35, 0, 30],
-    [20, 25, 30, 0]
+#distance_matrix = np.array([
+#    [0, 10, 15, 20],
+#    [10, 0, 35, 25],
+#    [15, 35, 0, 30],
+#    [20, 25, 30, 0]
+#])
+
+# Assumed coordinates for the four cities
+# You can change these coordinates to any other set that you prefer
+city_coordinates = np.array([
+    [0, 0],  # City 0
+    [10, 1],  # City 1
+    [5, 10],  # City 2
+    [0, 20]   # City 3
 ])
+
+# Calculate the distance matrix
+distance_matrix = np.sqrt(((city_coordinates[:, np.newaxis] - city_coordinates) ** 2).sum(axis=2))
+
+# Print the distance matrix
+print("Distance matrix:")
+print(distance_matrix)
+
 
 def total_distance(tour, dist_matrix):
     return sum(dist_matrix[tour[i], tour[i + 1]] for i in range(len(tour) - 1)) + dist_matrix[tour[-1], tour[0]]

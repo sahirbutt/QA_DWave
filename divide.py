@@ -14,7 +14,7 @@ offset = 0.0
 vartype = dimod.BINARY
 
 # trying to find binary representation Q of x according to x = y/m; xE[-1,3)
-y = 2.0
+y = 0.5
 m = 2.0
 
 # Fill linear and quadratic term according to
@@ -35,17 +35,17 @@ print(quadratic)
 bqm = dimod.BinaryQuadraticModel(linear, quadratic, offset, vartype)
 
 #EXACT SOLVER
-#solver = dimod.ExactSolver()
-#results = solver.sample(bqm)
+solver = dimod.ExactSolver()
+results = solver.sample(bqm)
 
 #SIMULATED ANNEALING
 #solver = dimod.SimulatedAnnealingSampler()
 #results = solver.sample(bqm, num_reads=20)
 
 #QUANTUM ANNEALING DWAVE
-solver = dwave.system.EmbeddingComposite(dwave.system.DWaveSampler())
-results = solver.sample(bqm, num_reads=7)
-dwave.inspector.show(results)
+#solver = dwave.system.EmbeddingComposite(dwave.system.DWaveSampler())
+#results = solver.sample(bqm, num_reads=7)
+#dwave.inspector.show(results)
 
 #print(results.first)
 print(results)

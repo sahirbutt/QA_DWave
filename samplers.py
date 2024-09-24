@@ -3,11 +3,14 @@ Section 2: Illustrative Examples and Definitions
 """
 
 import dimod
+import dwave.inspector
 from dwave.system.samplers import DWaveSampler
 from dwave.system.composites import EmbeddingComposite
 
 linear = {1: -5, 2: -3, 3: -8, 4: -6}
-quadratic = {(1, 2): 4, (1, 3): 8, (2, 3): 2, (3, 4): 10}
+#quadratic = {(1, 2): 4, (1, 3): 8, (2, 3): 2, (3, 4): 10}
+quadratic = {(1, 2): 2, (1, 3): 4, (2, 3): 1, (3, 4): 5,
+(2, 1): 2, (3, 1): 4, (3,2): 1, (4,3): 5}
 offset = 0.0
 vartype = dimod.BINARY
 
@@ -73,10 +76,16 @@ print("#" * 80)
 # See: https://docs.ocean.dwavesys.com/en/latest/overview/dwavesys.html#configuring-a-d-wave-system-as-a-solver
 #
 # For more information about the DWaveSampler(), refer to https://dwave-systemdocs.readthedocs.io/en/latest/reference/samplers/dwave_sampler.html#module-dwave.system.samplers.dwave_sampler
+
+####
 sampler = EmbeddingComposite(DWaveSampler())
-sample_set = sampler.sample(bqm)
+sample_set = sampler.sample(bqm, num_reads=10)
 print("Using DWaveSampler()")
 print(sample_set)
+dwave.inspector.show(sample_set)
+####
+
+
 
 # Using DWaveSampler()
 #    1  2  3  4 energy num_oc. chain_.
